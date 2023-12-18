@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
+import useModal from "@/hooks/useModal";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
@@ -48,13 +49,11 @@ export default function Home() {
           <p className="text-xl">Loading...</p>
         </div>
       )}
-
       {term && images.length === 0 && (
         <h1 className="text-xl text-center mx-auto my-10">
           No Images found, please enter a valid picture name.
         </h1>
       )}
-
       <div className="grid grid-cols-3 m-3 gap-2">
         {images &&
           images.map((image, index) => (
@@ -74,17 +73,13 @@ export default function Home() {
             </div>
           ))}
       </div>
-
-      {modal && (
+      {/* {modal && (
         <div className="fixed inset-8 bg-green-100 z-10 m-auto w-[24rem] md:w-[60rem] h-[25rem] md:h-[30rem] justify-center items-center flex rounded-lg">
-          <Modal
-            key={currentImg.id}
-            setModal={setModal}
-            images={images}
-            currentImg={currentImg}
-            term={term}
-          />
+          <Modal currentImg={currentImg} setModal={setModal} term={term} />
         </div>
+      )} */}
+      {modal && (
+        <Modal currentImg={currentImg} setModal={setModal} term={term} />
       )}
     </div>
   );
