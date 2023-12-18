@@ -9,6 +9,8 @@ export default function Home() {
   const [images, setImages] = useState([]);
   const [term, setTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState("");
+  const [currentImg, setCurrentImg] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -21,11 +23,15 @@ export default function Home() {
         return res.json();
       })
       .then((data) => {
-        console.log("data", data);
+        setImages(data.hits);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [term]);
+
+  function handleImageClick() {
+    setModal(true);
+  }
 
   return (
     <div className={`bg-gray-300 ${isLoading ? "h-screen" : "h-auto"}`}>
@@ -40,10 +46,21 @@ export default function Home() {
           <p className="text-xl">Loading...</p>
         </div>
       )}
+
+      {term && images.length === 0 && (
+        <h1 className="text-xl text-center mx-auto my-10">
+          No Images found, please enter a valid picture name.
+        </h1>
+      )}
+
       <div className="grid grid-cols-3 m-3 gap-2">
         {images &&
           images.map((image) => (
-            <div key={image.id} className="h-[200px] w-full">
+            <div
+              key={image.id}
+              onClick={handleImageClick}
+              className="h-[200px] w-full"
+            >
               <Image
                 src={image.webformatURL}
                 alt={image.tags}
@@ -55,6 +72,8 @@ export default function Home() {
             </div>
           ))}
       </div>
+
+      {modal && 
     </div>
   );
 }
