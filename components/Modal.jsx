@@ -1,9 +1,10 @@
 import { saveAs } from "file-saver";
 import { GrDownload } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
+import Image from "next/image";
 
 const Modal = ({ currentImg, setModal, term }) => {
-  const { webformatURL, user, comments, downloads, likes } = currentImg;
+  const { webformatURL, user, comments, downloads, likes, tags } = currentImg;
 
   const downloadImage = () => {
     saveAs(webformatURL, `${term}.jpg`);
@@ -29,10 +30,14 @@ const Modal = ({ currentImg, setModal, term }) => {
         </div>
 
         <div className="flex bg-gray-200 h-[60vh] justify-center p-4 rounded-lg">
-          <img
-            className="h-full rounded-lg overflow-hidden object-cover object-center"
+          <Image
             src={webformatURL}
-            alt=""
+            alt={tags}
+            // priority={true}
+            width={500}
+            height={500}
+            className="h-full w-full rounded-lg overflow-hidden object-cover object-center"
+            // loading="lazy"
           />
 
           <div className="p-2 flex flex-col justify-between md:p-6 text-xl">

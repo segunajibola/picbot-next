@@ -4,7 +4,6 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
-import useModal from "@/hooks/useModal";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
@@ -73,11 +72,6 @@ export default function Home() {
             </div>
           ))}
       </div>
-      {/* {modal && (
-        <div className="fixed inset-8 bg-green-100 z-10 m-auto w-[24rem] md:w-[60rem] h-[25rem] md:h-[30rem] justify-center items-center flex rounded-lg">
-          <Modal currentImg={currentImg} setModal={setModal} term={term} />
-        </div>
-      )} */}
       {modal && (
         <Modal currentImg={currentImg} setModal={setModal} term={term} />
       )}
