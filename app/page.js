@@ -31,16 +31,22 @@ export default function Home() {
   return (
     <div className="bg-red-300 h-screen">
       <Navbar />
-      <Input />
-      {isLoading && <p>Loading...</p>}
+      <Input updateTerm={text => {setTerm(text)}}/>
+      {isLoading && (
+        <div className="flex items-center justify-center my-10">
+          <p className="text-xl">Loading...</p>
+        </div>
+      )}
       {images &&
         images.map((image) => (
           <div key={image.id}>
             <Image
               src={image.webformatURL}
               alt={image.tags}
-              width={image.webformatWidth}
-              height={image.webformatHeight}
+              priority={true}
+              width={200}
+              height={200}
+              className="w-auto h-auto"
             />
           </div>
         ))}
