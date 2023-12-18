@@ -14,7 +14,7 @@ const Input = ({ updateTerm }) => {
     <div className="flex justify-center items-center flex-col gap-3 m-5">
       <h2 className="text-xl">What picture do you want to see?</h2>
       <form
-        className="flex justify-center gap-7 m-3 w-full"
+        className="flex justify-center gap-3 m-3 w-full"
         onSubmit={handleSubmit}
       >
         <input

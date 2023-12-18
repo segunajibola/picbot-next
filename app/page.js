@@ -22,34 +22,39 @@ export default function Home() {
       })
       .then((data) => {
         console.log("data", data);
-        setImages(data.hits);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [term]);
 
   return (
-    <div className="bg-red-300 h-screen">
+    <div className={`bg-gray-300 ${isLoading ? "h-screen" : "h-auto"}`}>
       <Navbar />
-      <Input updateTerm={text => {setTerm(text)}}/>
+      <Input
+        updateTerm={(text) => {
+          setTerm(text);
+        }}
+      />
       {isLoading && (
         <div className="flex items-center justify-center my-10">
           <p className="text-xl">Loading...</p>
         </div>
       )}
-      {images &&
-        images.map((image) => (
-          <div key={image.id}>
-            <Image
-              src={image.webformatURL}
-              alt={image.tags}
-              priority={true}
-              width={200}
-              height={200}
-              className="w-auto h-auto"
-            />
-          </div>
-        ))}
+      <div className="grid grid-cols-3 m-3 gap-2">
+        {images &&
+          images.map((image) => (
+            <div key={image.id} className="h-[200px] w-full">
+              <Image
+                src={image.webformatURL}
+                alt={image.tags}
+                priority={true}
+                width={300}
+                height={300}
+                className="rounded-md h-full w-full object-cover"
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
